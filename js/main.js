@@ -1,9 +1,10 @@
 /**Cat API https://docs.thecatapi.com/
  * Paginating through Search results:
- *This Example requests https://api.thecatapi.com/v1/images/search?limit=3&page=100&order=DESC
+ *This Example requests https://api.thecatapi.com/v1/images/search?limit=3&page=10&order=DESC
+ Page 0 to page 10
  *Breed Selection
  *It populates the Select Dropdown with https://api.thecatapi.com/v1/breeds
- *Requests a new Image with https://api.thecatapi.com/images/search?breed_id={{selected_breed.id}} when you change Breed
+ *Requests a new Image with https://api.thecatapi.com/v1/breeds/breed_id={{selected_breed.id}} when you change Breed
  */
 let previousBtn = document.getElementById('previous');
 let nextBtn = document.getElementById('next');
@@ -123,7 +124,6 @@ async function fetchImagesByPagination(selectedLimit, number) {
 
 //fetch data by breed's id
 async function fetchDataByBreedId(selectedBreedId) {
-
 
     try {
         let response = await fetch('https://api.thecatapi.com/v1/breeds/' + selectedBreedId, {
