@@ -1,7 +1,7 @@
 # Cat_API
 Sources
 GET/images/search
-https://api.thecatapi.com/v1/images/search?breed_ids=beng&include_breeds=true
+https://api.thecatapi.com/v1/images/search?limit=3&page=1&order=DESC`
 Route
 https://api.thecatapi.com/v1/images/search
 
