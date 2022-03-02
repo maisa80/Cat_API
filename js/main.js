@@ -20,9 +20,8 @@ let selectedLimit = limitList.value;
 
 
 
-fetchData();
-fetchAllData(selectedLimit, number);
-
+fetchBreedsOptions();
+fetchImagesByPagination(selectedLimit, number);
 
 let limitOptions = limitList.querySelectorAll("#limit option");
 limitList.addEventListener('change', selectLimitOptions);
@@ -30,32 +29,29 @@ nextBtn.addEventListener('click', selectNextBtn);
 previousBtn.addEventListener('click', selectPreviousBtn);
 
 
-async function fetchData(e) {
+async function fetchBreedsOptions(e) {
 
     try {
-        let response = await fetch('https://api.thecatapi.com/v1/breeds')
-
+        let URL = 'https://api.thecatapi.com/v1/breeds';
+        let response = await fetch(URL, {
+            method: "GET",
+            headers: {
+                'x-api-key': '93c56b63-d3ca-4ebd-905e-7a0df717877f'
+            }
+        })
         if (!response.ok) {
-            throw new Error('Something went wrong with the server');
+            throw new Error('Something went wrong...');
         }
 
         let breeds = await response.json();
-
-
         let optionItemsHTML = `<option>Select a breed</option>`;
-
-
         for (let breed of breeds) {
-
 
             optionItemsHTML += `<option id=${breed.id}>${breed.name}</option>`
 
-
         }
 
-
         list.innerHTML = optionItemsHTML;
-
         list.addEventListener('change', function () {
 
             var options = list.querySelectorAll("#list option");
@@ -85,48 +81,46 @@ async function fetchData(e) {
         console.log(error);
     }
 }
+
 //fetch data by page and limit order by Desc(how many images will be shown per page)
-async function fetchAllData(selectedLimit, number) {
+async function fetchImagesByPagination(selectedLimit, number) {
 
     try {
         let URL = `https://api.thecatapi.com/v1/images/search?limit=${selectedLimit}&page=${number}&order=DESC`;
-        fetchPaginatingUrl(URL);
+        let response = await fetch(URL, {
+            method: "GET",
+            headers: {
+                'x-api-key': '93c56b63-d3ca-4ebd-905e-7a0df717877f'
+            }
+        })
+    
+        if (!response.ok) {
+            throw new Error('Something went wrong...');
+        }
+        let catsImageUrl = ''
+        let pages = await response.json();
+    
+        for (let page of pages) {
+    
+            catsImageUrl = page.url;
+            catImage.innerHTML += `
+        
+            <div class="col-lg-3 col-md-4 col-6">
+            
+              <a href="#" class="d-block mb-4 h-100">
+                <img class="img-thumbnail rounded " src="${catsImageUrl}" alt="">
+              </a>
+            </div>
+            
+            `
+            pageNumber.innerHTML = `Page: ${number}`;
+        }
 
     } catch (error) {
         console.log(error);
     }
 }
-//call url
-async function fetchPaginatingUrl(URL) {
-    let response = await fetch(URL, {
-        method: "GET",
-        headers: {
-            'x-api-key': '93c56b63-d3ca-4ebd-905e-7a0df717877f'
-        }
-    })
 
-    if (!response.ok) {
-        throw new Error('Something went wrong...');
-    }
-    let catsImageUrl = ''
-    let pages = await response.json();
-
-    for (let page of pages) {
-
-        catsImageUrl = page.url;
-        catImage.innerHTML += `
-    
-        <div class="col-lg-3 col-md-4 col-6">
-        
-          <a href="#" class="d-block mb-4 h-100">
-            <img class="img-thumbnail rounded " src="${catsImageUrl}" alt="">
-          </a>
-        </div>
-        
-        `
-        pageNumber.innerHTML = `Page: ${number}`;
-    }
-}
 //fetch data by breed's id
 async function fetchDataByBreedId(selectedBreedId) {
 
@@ -185,29 +179,34 @@ async function fetchDataByBreedId(selectedBreedId) {
         console.log(error);
     }
 }
+
 //shows number of images per page
 function selectLimitOptions(e) {
     e.preventDefault();
     catImage.innerHTML = ''
     selectedLimit = limitList.value;
-    fetchAllData(selectedLimit, number);
+    fetchImagesByPagination(selectedLimit, number);
+      
 }
+
 //shows previous page
 function selectPreviousBtn(e) {
     e.preventDefault();
     catImage.innerHTML = ''
     number = number - 1;
     if (number < 0) number = 10;
-    fetchAllData(selectedLimit, number);
+    fetchImagesByPagination(selectedLimit, number);
 }
+
 //show next page
 function selectNextBtn(e) {
     e.preventDefault();
     catImage.innerHTML = ''
     number = number + 1;
     if (number > 10) number = 0
-    fetchAllData(selectedLimit, number);
+    fetchImagesByPagination(selectedLimit, number);
 }
+
 //converts adaptability value (1-5) to star rating
 function getAdaptability(adaptability) {
     switch (adaptability) {
@@ -241,6 +240,7 @@ function getAdaptability(adaptability) {
 
 
 }
+
 //converts grooming value (1-5) to star rating
 function getGrooming(grooming) {
     switch (grooming) {
@@ -271,6 +271,7 @@ function getGrooming(grooming) {
         // code block
     }
 }
+
 //converts indoor value (1-5) to star rating
 function getIndoor(indoor) {
     switch (indoor) {
