@@ -154,9 +154,7 @@ async function fetchDataByBreedId(selectedBreedId) {
         <i class="left-indent"><b>Temperament: </b>${breeds.temperament}</i>  
         <hr class="mt-1 mb-3">
   
-  
   `
-
 
         details.innerHTML = HTMLContent;
         let title = document.querySelector('#details a h3 ');
