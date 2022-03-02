@@ -15,17 +15,21 @@ let more = document.getElementById('more');
 let details = document.getElementById('details');
 let catImage = document.getElementById('catImage');
 let limitList = document.getElementById('limit');
+let orderList = document.getElementById('order');
 let pageNumber = document.getElementById('pageNumber');
 let number = 0;
 let selectedLimit = limitList.value;
+let selectedOrder = orderList.value;
 
 
 
 fetchBreedsOptions();
-fetchImagesByPagination(selectedLimit, number);
+fetchImagesByPagination(selectedLimit, number, selectedOrder);
 
 let limitOptions = limitList.querySelectorAll("#limit option");
 limitList.addEventListener('change', selectLimitOptions);
+let orderOptions = limitList.querySelectorAll("#order option");
+orderList.addEventListener('change', selectOrderOptions);
 nextBtn.addEventListener('click', selectNextBtn);
 previousBtn.addEventListener('click', selectPreviousBtn);
 
@@ -84,10 +88,10 @@ async function fetchBreedsOptions(e) {
 }
 
 //fetch data by page and limit order by Desc(how many images will be shown per page)
-async function fetchImagesByPagination(selectedLimit, number) {
+async function fetchImagesByPagination(selectedLimit, number, selectedOrder) {
 
     try {
-        let URL = `https://api.thecatapi.com/v1/images/search?limit=${selectedLimit}&page=${number}&order=DESC`;
+        let URL = `https://api.thecatapi.com/v1/images/search?limit=${selectedLimit}&page=${number}&order=${selectedOrder}`;
         let response = await fetch(URL, {
             method: "GET",
             headers: {
@@ -185,17 +189,23 @@ function selectLimitOptions(e) {
     e.preventDefault();
     catImage.innerHTML = ''
     selectedLimit = limitList.value;
-    fetchImagesByPagination(selectedLimit, number);
+    fetchImagesByPagination(selectedLimit, number, selectedOrder);
       
 }
-
+function selectOrderOptions(e) {
+    e.preventDefault();
+    catImage.innerHTML = ''
+    selectedOrder = orderList.value;
+    fetchImagesByPagination(selectedLimit, number, selectedOrder);
+      
+}
 //shows previous page
 function selectPreviousBtn(e) {
     e.preventDefault();
     catImage.innerHTML = ''
     number = number - 1;
     if (number < 0) number = 10;
-    fetchImagesByPagination(selectedLimit, number);
+    fetchImagesByPagination(selectedLimit, number, selectedOrder);
 }
 
 //show next page
@@ -204,7 +214,7 @@ function selectNextBtn(e) {
     catImage.innerHTML = ''
     number = number + 1;
     if (number > 10) number = 0
-    fetchImagesByPagination(selectedLimit, number);
+    fetchImagesByPagination(selectedLimit, number, selectedOrder);
 }
 
 //converts adaptability value (1-5) to star rating
