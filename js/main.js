@@ -23,33 +23,10 @@ fetchData();
 fetchAllData(selectedLimit, number);
 
 
-var limitOptions = limitList.querySelectorAll("#limit option");
-limitList.addEventListener('change', function (e) {
-  e.preventDefault();
-  catImage.innerHTML = ''
-  selectedLimit = limitList.value;
-  fetchAllData(selectedLimit, number);
-});
-nextBtn.addEventListener('click', function (e) {
-  e.preventDefault();
-  catImage.innerHTML = ''
-  number = number + 1;
-  console.log(number);
-  if (number > 10) number = 0;
-  console.log(number);
-
-  fetchAllData(selectedLimit, number);
-})
-previousBtn.addEventListener('click', function (e) {
-  e.preventDefault();
-  catImage.innerHTML = ''
-  number = number - 1;
-  console.log(number);
-  if (number < 0) number = 10;
-  console.log(number);
-
-fetchAllData(selectedLimit, number);
-})
+let limitOptions = limitList.querySelectorAll("#limit option");
+limitList.addEventListener('change', selectLimitOptions);
+nextBtn.addEventListener('click', selectNextBtn);
+previousBtn.addEventListener('click', selectPreviousBtn);
 
 
 async function fetchData(e) {
@@ -89,8 +66,7 @@ async function fetchData(e) {
           if (list.value === option.value) {
 
             fetchDataByBreedId(selectedBreedId);
-           
-            
+  
           }
         }
         else {
@@ -108,11 +84,11 @@ async function fetchData(e) {
     console.log(error);
   }
 }
-
+//fetch data by page and limit order by Desc(how many images will be shown per page)
 async function fetchAllData(selectedLimit, number) {
 
     try {
-      let URL = `https://api.thecatapi.com/v1/images/search?limit=${selectedLimit}&page=${number}`;
+      let URL = `https://api.thecatapi.com/v1/images/search?limit=${selectedLimit}&page=${number}&order=DESC`;
       let response = await fetch(URL, {
         method: "GET",
         headers: {
@@ -150,6 +126,7 @@ async function fetchAllData(selectedLimit, number) {
       console.log(error);
     }
   }
+  //fetch data by breed's id
   async function fetchDataByBreedId(selectedBreedId) {
   
    
@@ -209,7 +186,30 @@ async function fetchAllData(selectedLimit, number) {
       console.log(error);
     }
   }
-  
+  //shows number of images per page
+  function selectLimitOptions(e){
+    e.preventDefault();
+    catImage.innerHTML = ''
+    selectedLimit = limitList.value;
+    fetchAllData(selectedLimit, number);
+  }
+  //shows previous page
+  function selectPreviousBtn(e){
+    e.preventDefault();
+    catImage.innerHTML = ''
+    number = number - 1;
+    if (number < 0) number = 10;
+    fetchAllData(selectedLimit, number);
+  }
+  //show next page
+  function selectNextBtn(e){
+    e.preventDefault();
+    catImage.innerHTML = ''
+    number = number + 1;
+    if (number > 10) number = 0
+    fetchAllData(selectedLimit, number);
+  }
+  //converts adaptability value (1-5) to star rating
   function getAdaptability(adaptability) {
     switch (adaptability) {
       case 0:
@@ -242,6 +242,7 @@ async function fetchAllData(selectedLimit, number) {
   
   
   }
+  //converts grooming value (1-5) to star rating
   function getGrooming(grooming) {
     switch (grooming) {
       case 0:
@@ -271,6 +272,7 @@ async function fetchAllData(selectedLimit, number) {
       // code block
     }
   }
+  //converts indoor value (1-5) to star rating
   function getIndoor(indoor) {
     switch (indoor) {
       case 0:
