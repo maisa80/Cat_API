@@ -5,20 +5,23 @@
  *It populates the Select Dropdown with https://api.thecatapi.com/v1/breeds
  *Requests a new Image with https://api.thecatapi.com/images/search?breed_id={{selected_breed.id}} when you change Breed
  */
-const image = document.getElementById('image');
-const list = document.getElementById('list');
-const content = document.getElementById("content");
-const more = document.getElementById('more');
-const details = document.getElementById('details');
-const catImage = document.getElementById('catImage');
-const limitList = document.getElementById('limit');
-const number = 0;
-const selectedLimit = limitList.value;
+let previousBtn = document.getElementById('previous');
+let nextBtn = document.getElementById('next');
+let image = document.getElementById('image');
+let list = document.getElementById('list');
+let content = document.getElementById('content');
+let more = document.getElementById('more');
+let details = document.getElementById('details');
+let catImage = document.getElementById('catImage');
+let limitList = document.getElementById('limit');
+let number = 0;
+let selectedLimit = limitList.value;
 
 
 
-fetchAllData(selectedLimit, number);
 fetchData();
+fetchAllData(selectedLimit, number);
+
 
 var limitOptions = limitList.querySelectorAll("#limit option");
 limitList.addEventListener('change', function (e) {
@@ -27,7 +30,7 @@ limitList.addEventListener('change', function (e) {
   selectedLimit = limitList.value;
   fetchAllData(selectedLimit, number);
 });
-next.addEventListener('click', function (e) {
+nextBtn.addEventListener('click', function (e) {
   e.preventDefault();
   catImage.innerHTML = ''
   number = number + 1;
@@ -37,7 +40,7 @@ next.addEventListener('click', function (e) {
 
   fetchAllData(selectedLimit, number);
 })
-previous.addEventListener('click', function (e) {
+previousBtn.addEventListener('click', function (e) {
   e.preventDefault();
   catImage.innerHTML = ''
   number = number - 1;
@@ -45,20 +48,20 @@ previous.addEventListener('click', function (e) {
   if (number < 0) number = 10;
   console.log(number);
 
-  fetchAllData(selectedLimit, number);
+//   fetchAllData(selectedLimit, number);
 })
 
 
 async function fetchData(e) {
 
   try {
-    const response = await fetch('https://api.thecatapi.com/v1/breeds')
+    let response = await fetch('https://api.thecatapi.com/v1/breeds')
 
     if (!response.ok) {
       throw new Error('Something went wrong with the server');
     }
 
-    const breeds = await response.json();
+    let breeds = await response.json();
 
 
     let optionItemsHTML = `<option>Select a breed</option>`;
@@ -110,7 +113,7 @@ async function fetchAllData(selectedLimit, number) {
 
     try {
       let URL = `https://api.thecatapi.com/v1/images/search?limit=${selectedLimit}&page=${number}`;
-      const response = await fetch(URL, {
+      let response = await fetch(URL, {
         method: "GET",
         headers: {
           'x-api-key': '93c56b63-d3ca-4ebd-905e-7a0df717877f'
@@ -122,19 +125,15 @@ async function fetchAllData(selectedLimit, number) {
       }
   
       let catsImageUrl = ''
-      const pages = await response.json();
+      let pages = await response.json();
   
       for (let page of pages) {
   
         catsImageUrl = page.url;
-        // catName = page.breeds.name;
-        // selectedBreedId = page.breeds[0].id;
-        // console.log(page.breeds[0].id);
-        // <h2><a href="#" id="${page.breeds[0].id}">${page.breeds[0].name}</a></h2>
-        // <i>${page.breeds[0].origin}</i>
         catImage.innerHTML += `
     
         <div class="col-lg-3 col-md-4 col-6">
+        
           <a href="#" class="d-block mb-4 h-100">
             <img class="img-thumbnail rounded " src="${catsImageUrl}" alt="">
           </a>
@@ -155,7 +154,7 @@ async function fetchAllData(selectedLimit, number) {
   
    
     try {
-      const response = await fetch('https://api.thecatapi.com/v1/breeds/' + selectedBreedId, {
+      let response = await fetch('https://api.thecatapi.com/v1/breeds/' + selectedBreedId, {
         method: "GET",
         withCredentials: true,
         headers: {
@@ -167,7 +166,7 @@ async function fetchAllData(selectedLimit, number) {
         throw new Error('Something went wrong with the server');
       }
   
-      const breeds = await response.json();
+      let breeds = await response.json();
   
       let HTMLContent = ''
       HTMLContent += `
@@ -182,14 +181,14 @@ async function fetchAllData(selectedLimit, number) {
   
   
       details.innerHTML = HTMLContent;
-      const title = document.querySelector('#details a h3 ');
+      let title = document.querySelector('#details a h3 ');
   
       title.addEventListener('click', function (e) {
         e.preventDefault();
-        const theClickedPostLink = e.target;
+        let theClickedPostLink = e.target;
         selectedBreedId = theClickedPostLink.id;
         // console.log(selectedBreedId);
-        const moreContent = theClickedPostLink.parentNode.parentNode.parentNode.nextElementSibling;
+        let moreContent = theClickedPostLink.parentNode.parentNode.parentNode.nextElementSibling;
         // console.log(moreContent);
         fetchDataByBreedId(selectedBreedId);
   
