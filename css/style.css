@@ -2,7 +2,7 @@ body{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color:  var(--info);
 }
-h1, h2, span{
+h1, h2, span, #pageNumber{
     color: var(--info);
     margin: 20px;
 }
@@ -39,9 +39,10 @@ a:hover{
    
     background-color: #333;
 }
-.page, #content{
+.page, #content, #pageNumber{
     text-align: center;
     margin: 20px;
+    padding: 5px;
 }
 #details{
     border: 1px solid #333;

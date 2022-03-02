@@ -14,6 +14,7 @@ let more = document.getElementById('more');
 let details = document.getElementById('details');
 let catImage = document.getElementById('catImage');
 let limitList = document.getElementById('limit');
+let pageNumber = document.getElementById('pageNumber');
 let number = 0;
 let selectedLimit = limitList.value;
 
@@ -89,17 +90,24 @@ async function fetchAllData(selectedLimit, number) {
 
     try {
       let URL = `https://api.thecatapi.com/v1/images/search?limit=${selectedLimit}&page=${number}&order=DESC`;
-      let response = await fetch(URL, {
+      fetchPaginatingUrl(URL);
+  
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  //call url
+  async function fetchPaginatingUrl(URL){
+    let response = await fetch(URL, {
         method: "GET",
         headers: {
           'x-api-key': '93c56b63-d3ca-4ebd-905e-7a0df717877f'
         }
       })
-      console.log(URL);
+    
       if (!response.ok) {
-        throw new Error('Something went wrong with the server');
+        throw new Error('Something went wrong...');
       }
-  
       let catsImageUrl = ''
       let pages = await response.json();
   
@@ -116,15 +124,8 @@ async function fetchAllData(selectedLimit, number) {
         </div>
         
         `
-  
+  pageNumber.innerHTML = `Page: ${number}`;
       }
-  
-  
-  
-  
-    } catch (error) {
-      console.log(error);
-    }
   }
   //fetch data by breed's id
   async function fetchDataByBreedId(selectedBreedId) {
