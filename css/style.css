@@ -1,0 +1,100 @@
+body{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color:  var(--info);
+}
+h1, h2, span{
+    color: var(--info);
+    margin: 20px;
+}
+h3, i{
+    color: #fff;
+}
+#more{
+    display: none;
+  }
+  #more.show{
+    display: block;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+  }
+a{
+    list-style: none;
+}
+a:hover{
+    color: var(--info);
+}
+#name{
+    text-decoration: none;
+}
+#content img{
+    /* margin: 10px; */
+   width:100px;
+  
+}
+.btn-info {
+    margin: 2px;
+}
+.container{
+   
+    background-color: #333;
+}
+.page, #content{
+    text-align: center;
+    margin: 20px;
+}
+#details{
+    border: 1px solid #333;
+    margin: 20px;
+   
+}
+#catImage{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.left-indent {
+    margin-left: 40px;
+}
+
+.hide {
+    display: none;
+}
+.show{
+    display: block;
+}
+.rating-static {
+    width: 60px;
+    height: 16px;
+    display: block;
+    background: url('http://www.itsalif.info/blogfiles/rating/star-rating.png') 0 0 no-repeat;
+}
+
+.rating-50 {
+    background-position: 0 0;
+}
+
+.rating-40 {
+    background-position: -12px 0;
+}
+
+.rating-30 {
+    background-position: -24px 0;
+}
+
+.rating-20 {
+    background-position: -36px 0;
+}
+
+.rating-10 {
+    background-position: -48px 0;
+}
+
+.rating-0 {
+    background-position: -60px 0;
+}
+
+.rating-5 {
+    background-position: -48px -16px;
+}
+
