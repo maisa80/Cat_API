@@ -8,7 +8,7 @@ https://api.thecatapi.com/v1/images/search
 Search & Itterate through all approved images.
 *********************
 GET/breeds/:breed_id
-https://api.thecatapi.com/v1/breeds/:breed_id
+https://api.thecatapi.com/v1/breeds/abys
 HEADERS
 Content-Type
 application/json
