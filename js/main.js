@@ -195,6 +195,8 @@ function selectLimitOptions(e) {
     fetchImagesByPagination(selectedLimit, number, selectedOrder);
       
 }
+
+//shows order of images by asc, desc or random
 function selectOrderOptions(e) {
     e.preventDefault();
     catImage.innerHTML = ''
@@ -220,7 +222,7 @@ function selectNextBtn(e) {
     fetchImagesByPagination(selectedLimit, number, selectedOrder);
 }
 
-//converts adaptability value (1-5) to star rating
+//converts adaptability value (1-5) to ex. 1 of 5
 function getAdaptability(adaptability) {
     switch (adaptability) {
         case 0:
@@ -252,7 +254,7 @@ function getAdaptability(adaptability) {
 
 }
 
-//converts grooming value (1-5) to star rating
+//converts grooming value (1-5) to ex. 1 of 5
 function getGrooming(grooming) {
     switch (grooming) {
         case 0:
@@ -283,7 +285,7 @@ function getGrooming(grooming) {
     }
 }
 
-//converts indoor value (1-5) to star rating
+//converts indoor value (1-5) to ex. 1 of 5
 function getIndoor(indoor) {
     switch (indoor) {
         case 0:
