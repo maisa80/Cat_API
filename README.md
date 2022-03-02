@@ -1,17 +1,10 @@
 # Cat_API
-Sources
-GET/images/search
-https://api.thecatapi.com/v1/images/search?limit=3&page=1&order=DESC`
-Route
-https://api.thecatapi.com/v1/images/search
+Examples of used urls
+Pagination & Ordering
+https://api.thecatapi.com/v1/images/search?limit=3&page=10&order=DESC
 
-Search & Itterate through all approved images.
 *********************
 GET/breeds/:breed_id
 https://api.thecatapi.com/v1/breeds/abys
-HEADERS
-Content-Type
-application/json
-PATH VARIABLES
-breed_id
+This breed.id is available by listing all the Breeds via https://api.thecatapi.com/v1/breeds
 *******************
