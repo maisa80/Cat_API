@@ -48,7 +48,7 @@ previousBtn.addEventListener('click', function (e) {
   if (number < 0) number = 10;
   console.log(number);
 
-//   fetchAllData(selectedLimit, number);
+fetchAllData(selectedLimit, number);
 })
 
 
