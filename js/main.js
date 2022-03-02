@@ -165,8 +165,8 @@ async function fetchDataByBreedId(selectedBreedId) {
             let moreContent = theClickedPostLink.parentNode.parentNode.parentNode.nextElementSibling;
             // console.log(moreContent);
             fetchDataByBreedId(selectedBreedId);
-
-
+            
+            
             moreContent.innerHTML = `
           <p><b>Description:</b> ${breeds.description}</p>
           <p id="rating">${getAdaptability(breeds.adaptability)}</p>
@@ -174,7 +174,10 @@ async function fetchDataByBreedId(selectedBreedId) {
           <p id="rating">${getIndoor(breeds.indoor)}</p>
          
        `
+      
             moreContent.classList.toggle('show');
+            
+            
         })
     }
 
@@ -222,27 +225,25 @@ function getAdaptability(adaptability) {
     switch (adaptability) {
         case 0:
 
-            return `Adaptability<br><span class="rating-static rating-10"></span>`;
+            return `<p><b>Adaptability</b>: 0 of 5 </p>`;
             break;
         case 1:
-            return `Adaptability<br><span class="rating-static rating-10"></span>`;
+            return `<p><b>Adaptability</b>: 1 of 5 </p>`;
 
             break;
         case 2:
-            return `Adaptability:<span class="rating-static rating-20"></span>`;
+            return `<p><b>Adaptability</b>: 2 of 5 </p>`;
 
             break;
         case 3:
-            return `Adaptability:<span class="rating-static rating-30"></span>`;
-
+            return `<p><b>Adaptability</b>: 3 of 5 </p>`;
             break;
         case 4:
-            return `Adaptability:<span class="rating-static rating-40"></span>`;
+            return `<p><b>Adaptability</b>: 4 of 5 </p>`;
 
             break;
         case 5:
-            return `Adaptability: <span class="rating-static rating-50"></span>`;
-
+            return `<p><b>Adaptability</b>: 5 of 5</p>`;
             break;
         default:
         // code block
@@ -256,26 +257,26 @@ function getGrooming(grooming) {
     switch (grooming) {
         case 0:
 
-            return `Grooming: <span class="rating-static rating-0"></span>`;
+            return `<p><b>Grooming</b>: 0 of 5 </p>`;
             break;
         case 1:
 
-            return `Grooming: <span class="rating-static rating-10"></span>`;
+            return `<p><b>Grooming</b>: 1 of 5 </p>`;
             break;
         case 2:
 
-            return `Grooming: <span class="rating-static rating-20"></span>`;
+            return `<p><b>Grooming</b>: 2 of 5 </p>`;
             break;
         case 3:
 
-            return `Grooming: <span class="rating-static rating-30"></span>`;
+            return `<p><b>Grooming</b>: 3 of 5 </p>`;
             break;
         case 4:
 
-            return `Grooming: <span class="rating-static rating-40"></span>`;
+            return `<p><b>Grooming</b>: 4 of 5 </p>`;
             break;
         case 5:
-            return `Grooming: <span class="rating-static rating-50"></span>`;
+            return `<p><b>Grooming</b>: 5 of 5 </p>`;
             break;
         default:
         // code block
@@ -287,26 +288,26 @@ function getIndoor(indoor) {
     switch (indoor) {
         case 0:
 
-            return `Indoor: <span class="rating-static rating-0"></span>`;
+            return `<p><b>Indoor</b>: 0 of 5 </p>`; 
             break;
         case 1:
 
-            return `Indoor: <span class="rating-static rating-10"></span>`;
+            return `<p><b>Indoor</b>: 1 of 5 </p>`; 
             break;
         case 2:
 
-            return `Indoor: <span class="rating-static rating-20"></span>`;
+            return `<p><b>Indoor</b>: 2 of 5 </p>`; 
             break;
         case 3:
 
-            return `Indoor: <span class="rating-static rating-30"></span>`;
+            return `<p><b>Indoor</b>: 3 of 5 </p>`; 
             break;
         case 4:
 
-            return `Indoor: <span class="rating-static rating-40"></span>`;
+            return `<p><b>Indoor</b>: 4 of 5 </p>`; 
             break;
         case 5:
-            return `Indoor: <span class="rating-static rating-50"></span>`;
+            return `<p><b>Indoor</b>: 5 of 5 </p>`; 
             break;
         default:
         // code block

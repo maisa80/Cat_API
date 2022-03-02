@@ -8,8 +8,12 @@ h1, h2, span, #pageNumber {
     margin: 20px;
 }
 
-h3, i {
+h3, i, #more p {
     color: #fff;
+}
+
+b {
+    color: var(--info);
 }
 
 #more {
@@ -18,7 +22,6 @@ h3, i {
 
 #more.show {
     display: block;
-    background-color: #fff;
     padding: 20px;
     border-radius: 5px;
 }
@@ -78,39 +81,4 @@ a:hover {
 
 .show {
     display: block;
-}
-
-.rating-static {
-    width: 60px;
-    height: 16px;
-    display: block;
-    background: url('http://www.itsalif.info/blogfiles/rating/star-rating.png') 0 0 no-repeat;
-}
-
-.rating-50 {
-    background-position: 0 0;
-}
-
-.rating-40 {
-    background-position: -12px 0;
-}
-
-.rating-30 {
-    background-position: -24px 0;
-}
-
-.rating-20 {
-    background-position: -36px 0;
-}
-
-.rating-10 {
-    background-position: -48px 0;
-}
-
-.rating-0 {
-    background-position: -60px 0;
-}
-
-.rating-5 {
-    background-position: -48px -16px;
 }
